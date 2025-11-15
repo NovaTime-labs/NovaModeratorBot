@@ -1,1 +1,23 @@
+<div class="sidebar">
+    <div class="sidebar-title">NovaTime</div>
 
+    <a href="/NovaModeratorBot/index.html" class="item">
+        🏠 <span>Главная</span>
+    </a>
+
+    <a href="/NovaModeratorBot/automod.html" class="item">
+        🛡️ <span>Автомод</span>
+    </a>
+
+    <a href="/NovaModeratorBot/rules.html" class="item">
+        📜 <span>Правила</span>
+    </a>
+
+    <a href="/NovaModeratorBot/logs.html" class="item">
+        📁 <span>Логи</span>
+    </a>
+
+    <a href="/NovaModeratorBot/settings.html" class="item">
+        ⚙️ <span>Настройки</span>
+    </a>
+</div>
