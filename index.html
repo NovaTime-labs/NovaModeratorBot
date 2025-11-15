@@ -2,54 +2,41 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Nova Moderator — Dashboard</title>
-
+    <title>NovaTime — Dashboard</title>
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/sidebar.css">
-    <script defer src="assets/script.js"></script>
 </head>
+
 <body>
 
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-        <div class="sidebar-header">NovaTime</div>
-        <div class="sidebar-sub">Панель управления</div>
+<div class="sidebar">
+    <div class="sidebar-header">NovaTime</div>
 
-        <div class="sidebar-menu">
-            <a class="sidebar-item active" href="index.html">
-                <span class="icon">🏠</span> Dashboard
-            </a>
-            <a class="sidebar-item" href="automod.html">
-                <span class="icon">🛡️</span> Automod
-            </a>
-            <a class="sidebar-item" href="rules.html">
-                <span class="icon">📜</span> Rules
-            </a>
-            <a class="sidebar-item" href="logs.html">
-                <span class="icon">📁</span> Logs
-            </a>
-            <a class="sidebar-item" href="settings.html">
-                <span class="icon">⚙️</span> Settings
-            </a>
-        </div>
+    <div class="sidebar-menu">
+        <a class="sidebar-item active" href="index.html">🏠 Dashboard</a>
+        <a class="sidebar-item" href="automod.html">🛡️ Automod</a>
+        <a class="sidebar-item" href="rules.html">📜 Rules</a>
+        <a class="sidebar-item" href="logs.html">📁 Logs</a>
+        <a class="sidebar-item" href="settings.html">⚙️ Settings</a>
+    </div>
+</div>
+
+<div class="main">
+
+    <h1 class="page-title">Dashboard</h1>
+
+    <p class="page-note">
+        Добро пожаловать в панель NovaTime!  
+        Здесь позже появится статистика, графики, логирование событий и аналитика.
+    </p>
+
+    <div class="card">
+        <h2>Статус</h2>
+        <p>Бот онлайн? — <b>Пока не подключено</b></p>
+        <p>Автомод активен? — <b>Пока не подключено</b></p>
     </div>
 
-    <!-- MAIN -->
-    <div class="main">
-        <h1 class="header">Dashboard</h1>
-        <p class="header-note">
-            Добро пожаловать в панель Nova Moderator.  
-            Здесь появится статистика, уведомления и логика бота.
-        </p>
-
-        <div class="card">
-            <h2>Система</h2>
-            <p>Статус автомода: <b>локальный режим</b></p>
-            <p>Активных правил: <b>10</b></p>
-
-            <p class="small-note">Когда подключим сервер — данные станут живыми.</p>
-        </div>
-    </div>
+</div>
 
 </body>
 </html>
