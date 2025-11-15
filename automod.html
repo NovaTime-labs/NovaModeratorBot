@@ -1,9 +1,96 @@
-<link rel="stylesheet" href="assets/sidebar.css">
-<link rel="stylesheet" href="assets/styles.css">
-...
-<div id="sidebar"></div>
-<script src="assets/script.js"></script>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<div class="content">
-    <h1>Автомодерация</h1>
+    <title>Nova Moderator — Автомодерация</title>
+
+    <!-- Основные стили -->
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/sidebar.css">
+
+</head>
+<body>
+
+<div class="layout">
+
+    <!-- Сайдбар -->
+    <aside class="sidebar">
+        <div class="sidebar-title">Nova Moderator</div>
+
+        <a href="index.html" class="sidebar-link">🏠 Главная</a>
+        <a href="automod.html" class="sidebar-link active">🛡 Автомодерация</a>
+        <a href="rules.html" class="sidebar-link">📘 Правила</a>
+        <a href="logs.html" class="sidebar-link">📄 Логи</a>
+        <a href="settings.html" class="sidebar-link">⚙ Настройки</a>
+    </aside>
+
+    <!-- Контент справа -->
+    <main class="content">
+
+        <h1 class="page-title">Автомодерация</h1>
+
+        <!-- Блок -->
+        <section class="panel">
+            <h2 class="panel-title">Автомод</h2>
+
+            <label class="switch-row">
+                <span>Включить автомодератор</span>
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+            </label>
+        </section>
+
+        <!-- Блок -->
+        <section class="panel">
+            <h2 class="panel-title">Запрещённые слова</h2>
+            <textarea class="textarea" placeholder="плохоеСлово1, плохоеСлово2">плохоеСлово1, плохоеСлово2</textarea>
+        </section>
+
+        <!-- Блок -->
+        <section class="panel">
+            <h2 class="panel-title">Правила (R1–R10)</h2>
+
+            <div class="rule-row">
+                <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span></span>
+                </label>
+                <div class="rule-title">R1 — Мат / запрещённые слова</div>
+            </div>
+
+            <div class="rule-row">
+                <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span></span>
+                </label>
+                <div class="rule-title">R2 — Реклама серверов</div>
+            </div>
+
+            <div class="rule-row">
+                <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span></span>
+                </label>
+                <div class="rule-title">R3 — Оскорбления</div>
+            </div>
+
+            <div class="rule-row">
+                <label class="checkbox">
+                    <input type="checkbox" checked>
+                    <span></span>
+                </label>
+                <div class="rule-title">R4 — Токсичность</div>
+            </div>
+
+        </section>
+
+    </main>
 </div>
+
+<script src="assets/script.js"></script>
+</body>
+</html>
