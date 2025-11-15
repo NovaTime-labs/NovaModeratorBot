@@ -127,9 +127,14 @@ textarea {
     transition: max-height 0.22s ease-out, padding-bottom 0.18s;
 }
 
-.rule-item.active .rule-body {
+.rule-item.expanded .rule-body {
     max-height: 120px;
     padding-bottom: 10px;
+}
+
+.rule-item.expanded .rule-toggle-arrow {
+    transform: rotate(90deg);
+    color: #e5efff;
 }
 
 .rule-toggle-arrow {
