@@ -1,96 +1,124 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nova Moderator — Автомодерация</title>
 
     <!-- Основные стили -->
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/sidebar.css">
 
+    <style>
+        /* Контейнер всей страницы */
+        .page-container {
+            margin-left: 260px; /* место под сайдбар */
+            padding: 40px;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .block {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .block h2 {
+            color: #6cb3ff;
+            margin-bottom: 15px;
+            font-size: 26px;
+        }
+
+        .block label {
+            display: block;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 95px;
+            border-radius: 10px;
+            padding: 10px;
+            background: #1d1f20;
+            color: white;
+            border: 1px solid #333;
+            resize: vertical;
+        }
+
+        .rule-item {
+            margin: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="layout">
-
     <!-- Сайдбар -->
-    <aside class="sidebar">
-        <div class="sidebar-title">Nova Moderator</div>
+    <div class="sidebar">
+        <h1>Nova Moderator</h1>
 
-        <a href="index.html" class="sidebar-link">🏠 Главная</a>
-        <a href="automod.html" class="sidebar-link active">🛡 Автомодерация</a>
-        <a href="rules.html" class="sidebar-link">📘 Правила</a>
-        <a href="logs.html" class="sidebar-link">📄 Логи</a>
-        <a href="settings.html" class="sidebar-link">⚙ Настройки</a>
-    </aside>
+        <a href="index.html">🏠 Главная</a>
+        <a class="active" href="automod.html">🤖 Автомодерация</a>
+        <a href="rules.html">📘 Правила</a>
+        <a href="logs.html">📄 Логи</a>
+        <a href="settings.html">⚙️ Настройки</a>
+    </div>
 
     <!-- Контент справа -->
-    <main class="content">
+    <div class="page-container">
+        
+        <h1 style="color:#6cb3ff; font-size:34px; margin-bottom:20px;">Автомодерация</h1>
 
-        <h1 class="page-title">Автомодерация</h1>
-
-        <!-- Блок -->
-        <section class="panel">
-            <h2 class="panel-title">Автомод</h2>
-
-            <label class="switch-row">
-                <span>Включить автомодератор</span>
-                <label class="switch">
-                    <input type="checkbox" checked>
-                    <span class="slider"></span>
-                </label>
+        <!-- Автомод -->
+        <div class="block">
+            <h2>Автомод</h2>
+            <label>
+                <input type="checkbox" checked> Включить автомодератор
             </label>
-        </section>
+        </div>
 
-        <!-- Блок -->
-        <section class="panel">
-            <h2 class="panel-title">Запрещённые слова</h2>
-            <textarea class="textarea" placeholder="плохоеСлово1, плохоеСлово2">плохоеСлово1, плохоеСлово2</textarea>
-        </section>
+        <!-- Запрещённые слова -->
+        <div class="block">
+            <h2>Запрещённые слова</h2>
+            <textarea>плохоеСлово1, плохоеСлово2</textarea>
+        </div>
 
-        <!-- Блок -->
-        <section class="panel">
-            <h2 class="panel-title">Правила (R1–R10)</h2>
+        <!-- Правила -->
+        <div class="block">
+            <h2>Правила (R1–R10)</h2>
 
-            <div class="rule-row">
-                <label class="checkbox">
-                    <input type="checkbox" checked>
-                    <span></span>
-                </label>
-                <div class="rule-title">R1 — Мат / запрещённые слова</div>
+            <div class="rule-item">
+                <input type="checkbox" checked>
+                <span>R1 — Мат / запрещённые слова</span>
             </div>
 
-            <div class="rule-row">
-                <label class="checkbox">
-                    <input type="checkbox" checked>
-                    <span></span>
-                </label>
-                <div class="rule-title">R2 — Реклама серверов</div>
+            <div class="rule-item">
+                <input type="checkbox" checked>
+                <span>R2 — Реклама серверов</span>
             </div>
 
-            <div class="rule-row">
-                <label class="checkbox">
-                    <input type="checkbox" checked>
-                    <span></span>
-                </label>
-                <div class="rule-title">R3 — Оскорбления</div>
+            <div class="rule-item">
+                <input type="checkbox" checked>
+                <span>R3 — Оскорбления</span>
             </div>
 
-            <div class="rule-row">
-                <label class="checkbox">
-                    <input type="checkbox" checked>
-                    <span></span>
-                </label>
-                <div class="rule-title">R4 — Токсичность</div>
+            <div class="rule-item">
+                <input type="checkbox" checked>
+                <span>R4 — Токсичность</span>
             </div>
 
-        </section>
+        </div>
 
-    </main>
-</div>
+    </div> <!-- /page-container -->
 
-<script src="assets/script.js"></script>
 </body>
 </html>
