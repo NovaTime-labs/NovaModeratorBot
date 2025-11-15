@@ -1,1 +1,49 @@
+/* ==== Основной стиль ==== */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #0d0f12;
+    color: white;
+}
+
+/* Заголовки */
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #7ab0ff;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 600;
+    color: #91c1ff;
+    margin-top: 30px;
+}
+
+/* Стеклянные блоки */
+
+.card {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    padding: 18px 22px;
+    margin: 20px 0;
+
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Текст */
+
+p {
+    font-size: 16px;
+    color: #d0d4df;
+}
 
