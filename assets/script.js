@@ -1,19 +1,58 @@
-// Подгружаем sidebar.html во все страницы
+// =============== LOCAL STORAGE ===============
+function saveSettings() {
+    let settings = {
+        automod_enabled: document.querySelector("#automod-enabled")?.checked || false,
+        banned_words: document.querySelector("#banned-words")?.value || "",
+        rules: {}
+    };
 
-fetch("/NovaModeratorBot/assets/sidebar.html")
-  .then(response => response.text())
-  .then(html => {
-      document.getElementById("sidebar").innerHTML = html;
+    document.querySelectorAll(".rule-checkbox").forEach(cb => {
+        settings.rules[cb.dataset.rule] = cb.checked;
+    });
 
-      // Определяем текущий путь
-      const current = window.location.pathname;
+    localStorage.setItem("nova_automod", JSON.stringify(settings));
 
-      // Подсвечиваем активную кнопку
-      document.querySelectorAll(".sidebar .item").forEach(link => {
-          if (current.includes(link.getAttribute("href"))) {
-              link.style.background = "rgba(255,255,255,0.07)";
-              link.style.borderLeft = "4px solid #6aa7ff";
-              link.style.color = "#ffffff";
-          }
-      });
-  });
+    let st = document.querySelector("#save-status");
+    if (st) {
+        st.textContent = "Сохранено ✓";
+        setTimeout(() => st.textContent = "", 2000);
+    }
+}
+
+function loadSettings() {
+    let raw = localStorage.getItem("nova_automod");
+    if (!raw) return;
+    let settings = JSON.parse(raw);
+
+    if (document.querySelector("#automod-enabled"))
+        document.querySelector("#automod-enabled").checked = settings.automod_enabled;
+
+    if (document.querySelector("#banned-words"))
+        document.querySelector("#banned-words").value = settings.banned_words;
+
+    document.querySelectorAll(".rule-checkbox").forEach(cb => {
+        let id = cb.dataset.rule;
+        if (settings.rules[id] !== undefined) {
+            cb.checked = settings.rules[id];
+        }
+    });
+}
+
+// =============== ACCORDION ===============
+document.addEventListener("click", evt => {
+    const header = evt.target.closest(".rule-header");
+    if (!header) return;
+
+    const block = header.closest(".rule-item");
+    block.classList.toggle("active");
+});
+
+// =============== SAVE BUTTON ===============
+document.addEventListener("DOMContentLoaded", () => {
+    loadSettings();
+
+    const saveBtn = document.querySelector("#save-automod");
+    if (saveBtn) {
+        saveBtn.addEventListener("click", saveSettings);
+    }
+});
