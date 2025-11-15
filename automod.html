@@ -1,124 +1,289 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Moderator — Автомодерация</title>
+<meta charset="utf-8">
+<title>NovaTime — Automod</title>
 
-    <!-- Основные стили -->
-    <link rel="stylesheet" href="assets/styles.css">
-    <link rel="stylesheet" href="assets/sidebar.css">
+<link rel="stylesheet" href="assets/styles.css">
+<link rel="stylesheet" href="assets/sidebar.css">
 
-    <style>
-        /* Контейнер всей страницы */
-        .page-container {
-            margin-left: 260px; /* место под сайдбар */
-            padding: 40px;
-            color: #fff;
-            min-height: 100vh;
-        }
+<style>
+/* ====== Внутренние стили Automod (часть из твоего супер-UI) ====== */
 
-        .block {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 25px;
-            margin-bottom: 25px;
-            border-radius: 12px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-        }
+.card {
+    max-width: 950px;
+    background: rgba(13,16,24,0.96);
+    border-radius: 20px;
+    padding: 26px 30px 30px 30px;
+    box-shadow: 0 22px 60px rgba(0,0,0,0.75);
+    border: 1px solid rgba(60,66,87,0.7);
+    margin-bottom: 30px;
+}
 
-        .block h2 {
-            color: #6cb3ff;
-            margin-bottom: 15px;
-            font-size: 26px;
-        }
+/* заголовки */
+.section-title {
+    font-size: 24px;
+    color: #73b3ff;
+    margin-bottom: 18px;
+    margin-top: 0;
+}
 
-        .block label {
-            display: block;
-            margin-top: 10px;
-            font-size: 18px;
-        }
+/* текстовое поле */
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #2c313a;
+    background: #111317;
+    color: #cfd4da;
+    resize: vertical;
+    font-size: 15px;
+}
 
-        textarea {
-            width: 100%;
-            height: 95px;
-            border-radius: 10px;
-            padding: 10px;
-            background: #1d1f20;
-            color: white;
-            border: 1px solid #333;
-            resize: vertical;
-        }
+/* чекбоксы Discord стиля */
+.checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+}
 
-        .rule-item {
-            margin: 6px 0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-    </style>
+.checkbox-wrapper input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 2px solid #5865F2;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    transition: 0.18s;
+}
+
+.checkbox-wrapper input[type="checkbox"]:hover {
+    box-shadow: 0 0 8px rgba(88,101,242,0.7);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked {
+    background: #5865F2;
+    box-shadow: 0 0 10px rgba(88,101,242,0.9);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    color: white;
+    font-size: 16px;
+    left: 3.5px;
+    top: -1px;
+}
+
+/* блок правил */
+.rule-item {
+    background: #111317;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #252b36;
+    overflow: hidden;
+    transition: 0.18s;
+}
+
+.rule-item.active {
+    border-color: #5865F2;
+    box-shadow: 0 0 18px rgba(88,101,242,0.5);
+}
+
+.rule-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    cursor: pointer;
+}
+
+.rule-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rule-icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    background: radial-gradient(circle at top left, #7dd3fc, #4c51bf);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
+.rule-body {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 14px;
+    font-size: 14px;
+    color: #9ca3af;
+    transition: max-height 0.22s ease-out, padding-bottom 0.18s;
+}
+
+.rule-item.active .rule-body {
+    max-height: 120px;
+    padding-bottom: 10px;
+}
+
+.rule-toggle-arrow {
+    font-size: 18px;
+    color: #9ca3af;
+    transition: 0.18s;
+}
+
+.rule-item.active .rule-toggle-arrow {
+    transform: rotate(90deg);
+    color: #e5efff;
+}
+</style>
+
 </head>
 
 <body>
 
-    <!-- Сайдбар -->
-    <div class="sidebar">
-        <h1>Nova Moderator</h1>
+<!-- =============== SIDEBAR =============== -->
+<div class="sidebar">
+    <div class="sidebar-header">NovaTime</div>
 
-        <a href="index.html">🏠 Главная</a>
-        <a class="active" href="automod.html">🤖 Автомодерация</a>
-        <a href="rules.html">📘 Правила</a>
-        <a href="logs.html">📄 Логи</a>
-        <a href="settings.html">⚙️ Настройки</a>
+    <div class="sidebar-menu">
+        <a class="sidebar-item" href="index.html">🏠 Dashboard</a>
+        <a class="sidebar-item active" href="automod.html">🛡️ Automod</a>
+        <a class="sidebar-item" href="rules.html">📜 Rules</a>
+        <a class="sidebar-item" href="logs.html">📁 Logs</a>
+        <a class="sidebar-item" href="settings.html">⚙️ Settings</a>
+    </div>
+</div>
+
+<!-- =============== MAIN CONTENT =============== -->
+<div class="main">
+    <h1 class="page-title">Автомодерация</h1>
+    <p class="page-note">Все настройки временно сохраняются локально — localStorage.</p>
+
+    <!-- Блок 1: переключатель автомода -->
+    <div class="card">
+        <h2 class="section-title">Автомодератор</h2>
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="automod-toggle">
+            <label for="automod-toggle">Включить автомодерацию</label>
+        </div>
     </div>
 
-    <!-- Контент справа -->
-    <div class="page-container">
-        
-        <h1 style="color:#6cb3ff; font-size:34px; margin-bottom:20px;">Автомодерация</h1>
+    <!-- Блок 2: запрещённые слова -->
+    <div class="card">
+        <h2 class="section-title">Запрещённые слова</h2>
+        <textarea id="banned-words" rows="4"></textarea>
+    </div>
 
-        <!-- Автомод -->
-        <div class="block">
-            <h2>Автомод</h2>
-            <label>
-                <input type="checkbox" checked> Включить автомодератор
-            </label>
+    <!-- Блок 3: правила -->
+    <div class="card">
+        <h2 class="section-title">Правила (R1–R10)</h2>
+
+        <div id="rules-list"></div>
+    </div>
+
+</div>
+
+<!-- =============== SCRIPT =============== -->
+<script>
+// Метаданные правил
+const RULES = {
+    R1: { icon: "🗯️", name: "Мат / жесткие ругательства" },
+    R2: { icon: "📢", name: "Реклама / ссылки" },
+    R3: { icon: "😡", name: "Оскорбления" },
+    R4: { icon: "🔞", name: "NSFW / непристойный контент" },
+    R5: { icon: "⚖️", name: "Политика / религия / конфликты" },
+    R6: { icon: "📨", name: "Флуд / спам / капс" },
+    R7: { icon: "🔔", name: "Упоминания ролей без причины" },
+    R8: { icon: "☣️", name: "Фишинг / вредоносные ссылки" },
+    R9: { icon: "🔐", name: "Публикация личных данных" },
+    R10:{ icon: "💣", name: "Попытка взлома / токены" }
+};
+
+// загрузка настроек
+function loadSettings() {
+    return JSON.parse(localStorage.getItem("nova_automod") || "{}");
+}
+
+// сохранение
+function saveSettings(data) {
+    localStorage.setItem("nova_automod", JSON.stringify(data));
+}
+
+let settings = loadSettings();
+
+// установка initial значений
+document.getElementById("automod-toggle").checked =
+    settings.automod_enabled ?? true;
+
+document.getElementById("banned-words").value =
+    settings.banned_words?.join(", ") ?? "слово1, слово2";
+
+// генерация списка правил
+let container = document.getElementById("rules-list");
+container.innerHTML = "";
+
+for (let rid in RULES) {
+    const enabled = settings.rules?.[rid] ?? true;
+
+    let item = document.createElement("div");
+    item.className = "rule-item" + (enabled ? " active" : "");
+
+    item.innerHTML = `
+        <div class="rule-header">
+            <div class="rule-left">
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" data-rule="${rid}" ${enabled ? "checked" : ""}>
+                </div>
+                <div class="rule-icon">${RULES[rid].icon}</div>
+                <div><b>${rid}</b> — ${RULES[rid].name}</div>
+            </div>
+            <div class="rule-toggle-arrow">▶</div>
         </div>
 
-        <!-- Запрещённые слова -->
-        <div class="block">
-            <h2>Запрещённые слова</h2>
-            <textarea>плохоеСлово1, плохоеСлово2</textarea>
+        <div class="rule-body">
+            Подробнее о правиле ${rid} будет добавлено позже.
         </div>
+    `;
 
-        <!-- Правила -->
-        <div class="block">
-            <h2>Правила (R1–R10)</h2>
+    item.querySelector(".rule-header").addEventListener("click", () => {
+        item.classList.toggle("active");
+    });
 
-            <div class="rule-item">
-                <input type="checkbox" checked>
-                <span>R1 — Мат / запрещённые слова</span>
-            </div>
+    item.querySelector("input").addEventListener("change", saveAll);
 
-            <div class="rule-item">
-                <input type="checkbox" checked>
-                <span>R2 — Реклама серверов</span>
-            </div>
+    container.appendChild(item);
+}
 
-            <div class="rule-item">
-                <input type="checkbox" checked>
-                <span>R3 — Оскорбления</span>
-            </div>
+document.getElementById("automod-toggle").addEventListener("change", saveAll);
+document.getElementById("banned-words").addEventListener("input", saveAll);
 
-            <div class="rule-item">
-                <input type="checkbox" checked>
-                <span>R4 — Токсичность</span>
-            </div>
+// сохранение всех настроек
+function saveAll() {
+    let rulesState = {};
+    document.querySelectorAll("[data-rule]").forEach(el => {
+        rulesState[el.dataset.rule] = el.checked;
+    });
 
-        </div>
+    settings = {
+        automod_enabled: document.getElementById("automod-toggle").checked,
+        banned_words: document.getElementById("banned-words").value
+            .split(",")
+            .map(w => w.trim())
+            .filter(Boolean),
+        rules: rulesState
+    };
 
-    </div> <!-- /page-container -->
+    saveSettings(settings);
+}
+
+</script>
 
 </body>
 </html>
