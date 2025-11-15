@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Nova Moderator — Dashboard</title>
+    <title>Nova Moderator — Automod</title>
 
     <link rel="stylesheet" href="assets/styles.css">
     <link rel="stylesheet" href="assets/sidebar.css">
@@ -16,38 +16,97 @@
         <div class="sidebar-sub">Панель управления</div>
 
         <div class="sidebar-menu">
-            <a class="sidebar-item active" href="index.html">
-                <span class="icon">🏠</span> Dashboard
-            </a>
-            <a class="sidebar-item" href="automod.html">
-                <span class="icon">🛡️</span> Automod
-            </a>
-            <a class="sidebar-item" href="rules.html">
-                <span class="icon">📜</span> Rules
-            </a>
-            <a class="sidebar-item" href="logs.html">
-                <span class="icon">📁</span> Logs
-            </a>
-            <a class="sidebar-item" href="settings.html">
-                <span class="icon">⚙️</span> Settings
-            </a>
+            <a class="sidebar-item" href="index.html"><span class="icon">🏠</span> Dashboard</a>
+            <a class="sidebar-item active" href="automod.html"><span class="icon">🛡️</span> Automod</a>
+            <a class="sidebar-item" href="rules.html"><span class="icon">📜</span> Rules</a>
+            <a class="sidebar-item" href="logs.html"><span class="icon">📁</span> Logs</a>
+            <a class="sidebar-item" href="settings.html"><span class="icon">⚙️</span> Settings</a>
         </div>
     </div>
 
     <!-- MAIN -->
     <div class="main">
-        <h1 class="header">Dashboard</h1>
+
+        <h1 class="header">Автомодерация</h1>
         <p class="header-note">
-            Добро пожаловать в панель Nova Moderator.  
-            Здесь позже появится статистика, графики, уведомления и система модерации в реальном времени.
+            Здесь можно включить / выключить автомодерацию, задать запрещённые слова,  
+            и настроить правила R1–R10.  
+            Все настройки временно сохраняются локально (localStorage), пока не появится серверная часть.
         </p>
 
+        <!-- BLOCK: Enable automod -->
         <div class="card">
-            <h2>Состояние системы</h2>
-            <p>Автомодератор: <b id="status-automod">ЗАГРУЗКА…</b></p>
-            <p>Активные правила: <b id="status-rules">ЗАГРУЗКА…</b></p>
-            <p class="small-note">* Данные будут доступны, когда появится серверная часть.</p>
+            <h2>Автомодератор</h2>
+
+            <label class="checkbox-wrapper">
+                <input type="checkbox" id="automod-enabled">
+                <span>Включить автомодерацию</span>
+            </label>
         </div>
+
+        <!-- BLOCK: banned words -->
+        <div class="card">
+            <h2>Запрещённые слова</h2>
+            <textarea id="banned-words" placeholder="слово1, слово2"></textarea>
+        </div>
+
+        <!-- BLOCK: Rules -->
+        <div class="card">
+            <h2>Правила (R1–R10)</h2>
+
+            <div class="rules-list">
+
+                <!-- Генерируем 10 правил -->
+                <script>
+                    const rules = {
+                        R1: "Мат / жесткие ругательства",
+                        R2: "Реклама / ссылки",
+                        R3: "Оскорбления участников",
+                        R4: "NSFW / непристойный контент",
+                        R5: "Политика / религия / конфликты",
+                        R6: "Флуд / спам / капс",
+                        R7: "Пинги ролей без причины",
+                        R8: "Фишинг / вредоносные ссылки",
+                        R9: "Публикация личных данных",
+                        R10: "Попытка взлома / токены"
+                    };
+
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const container = document.querySelector(".rules-list");
+
+                        for (let id in rules) {
+                            const el = document.createElement("div");
+                            el.className = "rule-item";
+
+                            el.innerHTML = `
+                                <div class="rule-header" data-rule="${id}">
+                                    <div class="rule-left">
+                                        <div class="checkbox-wrapper">
+                                            <input type="checkbox" class="rule-checkbox" data-rule="${id}">
+                                        </div>
+                                        <span><b>${id}</b> — ${rules[id]}</span>
+                                    </div>
+                                    <div class="rule-toggle-arrow">▶</div>
+                                </div>
+                                <div class="rule-body">
+                                    Подробнее о правиле <b>${id}</b> будет добавлено позже.
+                                </div>
+                            `;
+
+                            container.appendChild(el);
+                        }
+                    });
+                </script>
+
+            </div>
+        </div>
+
+        <!-- SAVE -->
+        <div class="card">
+            <button id="save-automod">💾 Сохранить настройки</button>
+            <span id="save-status"></span>
+        </div>
+
     </div>
 
 </body>
