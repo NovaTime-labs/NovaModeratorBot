@@ -1,49 +1,111 @@
-/* ==== Основной стиль ==== */
-
 body {
     margin: 0;
-    padding: 0;
     font-family: "Segoe UI", sans-serif;
-    background: #0d0f12;
-    color: white;
+    background: #0a0c10;
+    color: #d7d8df;
+}
+
+.main {
+    margin-left: 260px;
+    padding: 35px;
 }
 
 /* Заголовки */
-
-h1 {
-    font-size: 32px;
-    font-weight: 600;
-    color: #7ab0ff;
-    margin-bottom: 15px;
+.header {
+    font-size: 28px;
+    color: #75b4ff;
+    margin-top: 0;
 }
 
-h2 {
-    font-size: 26px;
-    font-weight: 600;
-    color: #91c1ff;
-    margin-top: 30px;
+.header-note {
+    color: #8e96a3;
+    margin-top: -10px;
+    margin-bottom: 25px;
 }
 
-/* Стеклянные блоки */
-
+/* Карточки */
 .card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-
-    padding: 18px 22px;
-    margin: 20px 0;
-
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.08);
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: rgba(14, 16, 23, 0.98);
+    border-radius: 16px;
+    padding: 22px 26px;
+    margin-bottom: 25px;
+    border: 1px solid rgba(100, 120, 255, 0.18);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+    backdrop-filter: blur(6px);
 }
 
-/* Текст */
+/* Чекбоксы Discord-стиля */
+.checkbox-wrapper input[type="checkbox"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid #5865F2;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+}
 
-p {
+.checkbox-wrapper input[type="checkbox"]:checked {
+    background: #5865F2;
+    box-shadow: 0 0 10px rgba(88,101,242,0.8);
+}
+
+.checkbox-wrapper input[type="checkbox"]:checked::after {
+    content: "✔";
+    position: absolute;
+    color: white;
     font-size: 16px;
-    color: #d0d4df;
+    left: 3px;
+    top: -2px;
 }
 
+/* Rules accordion */
+.rule-item {
+    background: #10131a;
+    border: 1px solid #1d2430;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: 0.2s;
+}
+
+.rule-header {
+    padding: 12px 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rule-item.active {
+    border-color: #5865F2;
+    box-shadow: 0 0 20px rgba(88,101,242,0.55);
+}
+
+.rule-toggle-arrow {
+    transition: 0.2s;
+}
+
+.rule-item.active .rule-toggle-arrow {
+    transform: rotate(90deg);
+}
+
+.rule-body {
+    padding: 0 14px;
+    max-height: 0;
+    overflow: hidden;
+    color: #8e96a3;
+    transition: max-height 0.2s ease-out, padding 0.2s;
+}
+
+.rule-item.active .rule-body {
+    padding: 8px 14px 12px 14px;
+    max-height: 120px;
+}
+
+/* Save status */
+#save-status {
+    margin-left: 10px;
+    font-size: 15px;
+    color: #7fb7ff;
+}
