@@ -1,23 +1,68 @@
-<div class="sidebar">
-    <div class="sidebar-title">NovaTime</div>
+/* ==== SIDEBAR ==== */
 
-    <a href="/NovaModeratorBot/index.html" class="item">
-        🏠 <span>Главная</span>
-    </a>
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
 
-    <a href="/NovaModeratorBot/automod.html" class="item">
-        🛡️ <span>Автомод</span>
-    </a>
+    background: rgba(17, 20, 27, 0.45);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
 
-    <a href="/NovaModeratorBot/rules.html" class="item">
-        📜 <span>Правила</span>
-    </a>
+    border-right: 1px solid rgba(255,255,255,0.07);
+    box-shadow: 8px 0 25px rgba(0,0,0,0.25);
 
-    <a href="/NovaModeratorBot/logs.html" class="item">
-        📁 <span>Логи</span>
-    </a>
+    padding-top: 25px;
+}
 
-    <a href="/NovaModeratorBot/settings.html" class="item">
-        ⚙️ <span>Настройки</span>
-    </a>
-</div>
+.sidebar-title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #7ab0ff;
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+}
+
+/* Элементы меню */
+
+.sidebar .item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 25px;
+    font-size: 17px;
+
+    color: #cfd6e3;
+    text-decoration: none;
+
+    border-left: 4px solid transparent;
+
+    transition: 0.15s;
+}
+
+.sidebar .item:hover {
+    background: rgba(255, 255, 255, 0.07);
+    color: #fff;
+    border-left: 4px solid #6aa7ff;
+    padding-left: 30px;
+}
+
+/* Иконки внутри */
+
+.sidebar .item span {
+    font-size: 17px;
+}
+
+/* Контент справа */
+
+.content {
+    margin-left: 260px;
+    padding: 40px;
+    min-height: 100vh;
+    background: #0d0f12;
+    color: white;
+}
