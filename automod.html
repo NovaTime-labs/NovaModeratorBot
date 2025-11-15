@@ -238,7 +238,7 @@ for (let rid in RULES) {
     const enabled = settings.rules?.[rid] ?? true;
 
     let item = document.createElement("div");
-    item.className = "rule-item" + (enabled ? " active" : "");
+item.className = "rule-item";  // active не трогаем
 
     item.innerHTML = `
         <div class="rule-header">
