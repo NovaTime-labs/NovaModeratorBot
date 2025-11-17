@@ -76,13 +76,6 @@ function updateActivity() {
 
 setInterval(updateActivity, ACTIVITY_UPDATE_INTERVAL);
 
-
-// ================== УХОД С САЙТА ==================
-window.addEventListener("beforeunload", () => {
-    setLoggedOut();
-});
-
-
 // ================== ЗАЩИТА СТРАНИЦ ==================
 (function () {
     const isLoginPage = window.location.pathname.includes("login.html");
