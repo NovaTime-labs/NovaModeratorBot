@@ -87,10 +87,19 @@ setInterval(updateActivity, ACTIVITY_UPDATE_INTERVAL);
         return;
     }
 
-    if (!isLogged() || !checkInactivity()) {
+    if (!isLogged()) {
+    window.location.replace("login.html");
+    return;
+}
+
+// сначала пропускаем, потом через 1 сек проверяем активность
+setTimeout(() => {
+    if (!checkInactivity()) {
         setLoggedOut();
         window.location.replace("login.html");
     }
+}, 1000);
+
 })();
 
 
